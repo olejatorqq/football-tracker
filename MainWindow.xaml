@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -17,11 +17,25 @@
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=""></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dgMain" AutoGenerateColumns="False" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="5" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding teamPosition}" Width="25" Header="№" />
+                <DataGridTextColumn Binding="{Binding teamName}" Width="124" Header="Team" />
+                <DataGridTextColumn Binding="{Binding teamPoints}" Width="50" Header="Points" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
     </Grid>
 </Window>

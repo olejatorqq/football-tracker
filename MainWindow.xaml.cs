@@ -20,14 +20,22 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal class Team
+        {
+            public int teamPosition { get; set; }
+            public string teamName { get; set; }
+            public int teamPoints { get; set; }
+        }
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
+            Team[] team = new Team[1];
+            team[0] = new Team() { teamPosition = 1, teamName = "Liverpoool", teamPoints = 100 };
+            dgMain.ItemsSource = team;
         }
     }
 }
