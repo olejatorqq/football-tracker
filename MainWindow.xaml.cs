@@ -12,17 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DeserializeClass;
 
 namespace WpfApp1
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
         internal class connectionToken
         {
-            public string token = "***";
+            public string token = "294ee9328d0b4b038623438240d0588c";
         }
         internal class Team
         {
@@ -42,6 +44,8 @@ namespace WpfApp1
             team[0] = new Team() { teamPosition = 1, teamName = "Liverpoool", teamPoints = 100 };
             dgMain.ItemsSource = team;
             
+            
         }
     }
+
 }
