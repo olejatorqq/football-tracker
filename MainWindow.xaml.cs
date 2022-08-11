@@ -32,8 +32,13 @@ namespace WpfApp1
         {
             public int teamPosition { get; set; }
             public string teamName { get; set; }
+            public int matchPlayed { get; set; }
+            public int winMatches { get; set; }
+            
+            public int drawMatches { get; set; }
+            public int loseMatches { get; set; }
             public int teamPoints { get; set; }
-            public int goalDifference { get; set; }
+            public string formTeams { get; set; }
         }
         public MainWindow()
         {
@@ -55,6 +60,7 @@ namespace WpfApp1
             };
 
             TeamList[] teamList = new TeamList[20];
+            string bb = "";
 
             using (var response = await client.SendAsync(request))
             {
@@ -67,9 +73,8 @@ namespace WpfApp1
                 {
                     foreach (var nameTeams in stand.table)
                     {
-                        
-                        teamList[nameTeams.position - 1] = new TeamList { teamPosition = nameTeams.position, teamName = nameTeams.team.shortName, teamPoints = nameTeams.points, goalDifference = nameTeams.goalDifference };
-                        
+                        teamList[nameTeams.position - 1] = new TeamList { teamPosition = nameTeams.position, teamName = nameTeams.team.shortName, matchPlayed=nameTeams.playedGames, winMatches=nameTeams.won, 
+                            drawMatches=nameTeams.draw, loseMatches=nameTeams.lost, teamPoints = nameTeams.points, formTeams = bb };
                     }
                 }
 
@@ -86,6 +91,7 @@ namespace WpfApp1
 
 
         }
+
     }
 
 }

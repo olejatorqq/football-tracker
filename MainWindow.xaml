@@ -27,12 +27,16 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgMain" AutoGenerateColumns="False" Grid.Column="6" Grid.ColumnSpan="2" Grid.RowSpan="7" Margin="0,10,0,10" IsReadOnly="True" >
+        <DataGrid x:Name="dgMain" AutoGenerateColumns="False" Grid.Column="5" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding teamPosition}" Width="25" Header="№" />
-                <DataGridTextColumn Binding="{Binding teamName}" Width="110" Header="Team" />
-                <DataGridTextColumn Binding="{Binding teamPoints}" Width="38" Header="Points" />
-                <DataGridTextColumn Binding="{Binding goalDifference}" Width="38" Header="GD" />
+                <DataGridTextColumn Binding="{Binding teamName}" Width="95" Header="Club" />
+                <DataGridTextColumn Binding="{Binding matchPlayed}" Width="28" Header="MP" />
+                <DataGridTextColumn Binding="{Binding winMatches}" Width="28" Header="W" />
+                <DataGridTextColumn Binding="{Binding drawMatches}" Width="28" Header="D" />
+                <DataGridTextColumn Binding="{Binding loseMatches}" Width="28" Header="L" />
+                <DataGridTextColumn Binding="{Binding teamPoints}" Width="28" Header="Pt" />
+                <DataGridTextColumn Binding="{Binding formTeams}" Width="52" Header="Form" />
             </DataGrid.Columns>
         </DataGrid>
 
