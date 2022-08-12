@@ -1,1 +1,1 @@
-# EPL stats checker (livetable will be changed)
+# EPL stats checker
