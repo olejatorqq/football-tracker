@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_LoadedAsync">
+        Title="EplTracker" Height="450" Width="800" Loaded="MainWindow_LoadedAsync">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -27,7 +27,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgMain" AutoGenerateColumns="False" Grid.Column="5" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" >
+        <DataGrid x:Name="dgMain" AutoGenerateColumns="False" Grid.Column="5" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" EnableRowVirtualization="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding teamPosition}" Width="25" Header="№" />
                 <DataGridTextColumn Binding="{Binding teamName}" Width="95" Header="Club" />
@@ -37,6 +37,14 @@
                 <DataGridTextColumn Binding="{Binding loseMatches}" Width="28" Header="L" />
                 <DataGridTextColumn Binding="{Binding teamPoints}" Width="28" Header="Pt" />
                 <DataGridTextColumn Binding="{Binding formTeams}" Width="52" Header="Form" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dgMain_Shedule" AutoGenerateColumns="False" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding matchTime}" Width="40" Header="Time" />
+                <DataGridTextColumn Binding="{Binding team1SheduleName}" Width="105" Header="Club" />
+                <DataGridTextColumn Binding="{Binding matchScore}" Width="60" Header="Score" />
+                <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="105" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
 

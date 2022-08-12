@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DeserializeClass;
+using DeserializeTableClass;
 using Newtonsoft.Json;
 
 namespace WpfApp1
@@ -26,7 +26,7 @@ namespace WpfApp1
     {
         internal class connectionToken
         {
-            public string token = "***";
+            public string token = "294ee9328d0b4b038623438240d0588c";
         }
         internal class TeamList
         {
@@ -47,6 +47,9 @@ namespace WpfApp1
 
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// 
+            /// </summary>
             connectionToken auth_token = new connectionToken();
             var client = new HttpClient();
             var request = new HttpRequestMessage
@@ -60,13 +63,12 @@ namespace WpfApp1
             };
 
             TeamList[] teamList = new TeamList[20];
-            string bb = "";
 
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                DeserializeClass.Root stats = JsonConvert.DeserializeObject<DeserializeClass.Root>(body);
+                DeserializeTableClass.Root stats = JsonConvert.DeserializeObject<DeserializeTableClass.Root>(body);
 
 
                 foreach (var stand in stats.standings)
@@ -74,7 +76,7 @@ namespace WpfApp1
                     foreach (var nameTeams in stand.table)
                     {
                         teamList[nameTeams.position - 1] = new TeamList { teamPosition = nameTeams.position, teamName = nameTeams.team.shortName, matchPlayed=nameTeams.playedGames, winMatches=nameTeams.won, 
-                            drawMatches=nameTeams.draw, loseMatches=nameTeams.lost, teamPoints = nameTeams.points, formTeams = bb };
+                            drawMatches=nameTeams.draw, loseMatches=nameTeams.lost, teamPoints = nameTeams.points, formTeams = nameTeams.form };
                     }
                 }
 
