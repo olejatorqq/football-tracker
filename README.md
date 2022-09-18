@@ -1,2 +1,2 @@
 # EPL stats checker
-App closed due to poor work API and bad results of my favorite team
+App closed due to poor work API and bad results of my favorite team :|
