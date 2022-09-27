@@ -27,7 +27,7 @@ namespace WpfApp1
     {
         public static class connectionToken
         {
-            public static string token = "Paste your Api key here";
+            public static string token = "Paste your Api key here"
         }
         internal class TeamList
         {
@@ -108,40 +108,62 @@ namespace WpfApp1
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            DateTime thisDay = DateTime.Today;
+            DateTime endDate = DateTime.Today.AddDays(7);
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id=1204&from_date=27.09.2022&to_date=07.10.2022&Authorization={connectionToken.token}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id=1204&from_date={thisDay.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={connectionToken.token}"),
             };
-
+            
             SheduleList[] sheduleList = new SheduleList[10];
 
 
             using (var response = await client.SendAsync(request))
             {
 
-                /*response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
+                List<DeserializeSheduleClass.Root> tableShedule = JsonConvert.DeserializeObject<List<DeserializeSheduleClass.Root>>(body);
 
-                foreach (var nameTeam in table)
+                string score = null;
+                int i = 0;
+
+
+                foreach (var shedule in tableShedule)
                 {
-                    teamList[int.Parse(nameTeam.position) - 1] = new TeamList
+                    if (shedule.localteam_score == "?" && shedule.visitorteam_score == "?")
                     {
-                        teamPosition = nameTeam.position,
-                        teamName = nameTeam.team_name,
-                        matchPlayed = nameTeam.round,
-                        winMatches = nameTeam.overall_w,
-                        drawMatches = nameTeam.overall_d,
-                        loseMatches = nameTeam.overall_l,
-                        teamPoints = nameTeam.points,
-                        formTeams = nameTeam.recent_form
-                    };
+                        score = "    0:0";
+                    }
+                    else
+                    {
+                        score = shedule.localteam_score + " " + shedule.visitorteam_score;
+                    }
+                    sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score , team2SheduleName = shedule.visitorteam_name};
+                    i++;
+                }
+
+                /*for (int i = 0; i < sheduleList.Length; i++)
+                {
+                    foreach (var team in tableShedule)
+                    {
+                        if (team.localteam_score == null && team.visitorteam_score == null)
+                        {
+                            score = "0:0";
+                        }
+                        else
+                        {
+                            score = team.localteam_score + " " + team.visitorteam_score;     
+                        }
+                        sheduleList[i] = new SheduleList { matchTime = team.time + " " + team.formatted_date, team1SheduleName = team.localteam_name, matchScore = score };
+                        break;
+                    }
                 }*/
 
 
-
+                dgMain_Shedule.ItemsSource = sheduleList;
 
                 //MessageBox.Show(table.team_name, "zxc");
             }
