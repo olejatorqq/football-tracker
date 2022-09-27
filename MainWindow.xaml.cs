@@ -26,7 +26,7 @@ namespace WpfApp1
     {
         internal class connectionToken
         {
-            public string token = "294ee9328d0b4b038623438240d0588c";
+            public string token = "Paste your token here";
         }
         internal class TeamList
         {
@@ -40,19 +40,30 @@ namespace WpfApp1
             public int teamPoints { get; set; }
             public string formTeams { get; set; }
         }
+        internal class SheduleList
+        {
+            public string matchTime { get; set; }
+            public string team1SheduleName { get; set; }
+            public string matchScore { get; set; }
+            public string team2SheduleName { get; set;}
+        }
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        
+
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
+
             /// <summary>
-            /// 
+            /// Логика работы таблицы Апл
             /// </summary>
-            connectionToken auth_token = new connectionToken();
+
+            /*connectionToken auth_token = new connectionToken();
             var client = new HttpClient();
-            var request = new HttpRequestMessage
+            var requestStanding = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri("https://api.football-data.org/v4/competitions/PL/standings"),
@@ -62,14 +73,13 @@ namespace WpfApp1
                 },
             };
 
-            TeamList[] teamList = new TeamList[20];
+            TeamList[] teamList = new TeamList[20];*/
 
-            using (var response = await client.SendAsync(request))
+            /*using (var response = await client.SendAsync(requestStanding))
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
                 DeserializeTableClass.Root stats = JsonConvert.DeserializeObject<DeserializeTableClass.Root>(body);
-
 
                 foreach (var stand in stats.standings)
                 {
@@ -80,16 +90,14 @@ namespace WpfApp1
                     }
                 }
 
-            }
+            }*/
 
-            dgMain.ItemsSource = teamList;
-
-            /*Team[] team = new Team[1];
-            team[0] = new Team() { teamPosition = 1, teamName = "Liverpoool", teamPoints = 100 };
-            dgMain.ItemsSource = team;
-
-            DeserializeClass.Root statsTeams = new DeserializeClass.Root();*/
-
+            /// <summary>
+            /// Логика работы таблицы с расписанием Апл
+            /// </summary>
+            /// 
+            
+            //dgMain.ItemsSource = teamList;
 
 
         }

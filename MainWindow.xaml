@@ -39,7 +39,7 @@
                 <DataGridTextColumn Binding="{Binding formTeams}" Width="52" Header="Form" />
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dgMain_Shedule" AutoGenerateColumns="False" Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" >
+        <DataGrid x:Name="dgMain_Shedule" AutoGenerateColumns="False"  Grid.ColumnSpan="4" Grid.RowSpan="7" Margin="10,10,10,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding matchTime}" Width="40" Header="Time" />
                 <DataGridTextColumn Binding="{Binding team1SheduleName}" Width="105" Header="Club" />
