@@ -92,41 +92,61 @@ namespace WpfApp1
                         formTeams = nameTeam.recent_form
                     };
                 }
-                
-                
-                //MessageBox.Show(table.team_name, "zxc");
 
-                Console.WriteLine(body);
+                 
+
+
+                //MessageBox.Show(table.team_name, "zxc");
             }
+
             dgMain.ItemsSource = teamList;
 
-            /*using (var response = await client.SendAsync(requestStanding))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                DeserializeTableClass.Root stats = JsonConvert.DeserializeObject<DeserializeTableClass.Root>(body);
 
-                foreach (var stand in stats.standings)
-                {
-                    foreach (var nameTeams in stand.table)
-                    {
-                        teamList[nameTeams.position - 1] = new TeamList { teamPosition = nameTeams.position, teamName = nameTeams.team.shortName, matchPlayed=nameTeams.playedGames, winMatches=nameTeams.won, 
-                            drawMatches=nameTeams.draw, loseMatches=nameTeams.lost, teamPoints = nameTeams.points, formTeams = nameTeams.form };
-                    }
-                }
-
-            }*/
-
-            /// <summary>
-            /// Логика работы таблицы с расписанием Апл
-            /// </summary>
-            /// 
-
-            //dgMain.ItemsSource = teamList;
 
 
         }
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id=1204&from_date=27.09.2022&to_date=07.10.2022&Authorization={connectionToken.token}"),
+            };
+
+            SheduleList[] sheduleList = new SheduleList[10];
+
+
+            using (var response = await client.SendAsync(request))
+            {
+
+                /*response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
+
+                foreach (var nameTeam in table)
+                {
+                    teamList[int.Parse(nameTeam.position) - 1] = new TeamList
+                    {
+                        teamPosition = nameTeam.position,
+                        teamName = nameTeam.team_name,
+                        matchPlayed = nameTeam.round,
+                        winMatches = nameTeam.overall_w,
+                        drawMatches = nameTeam.overall_d,
+                        loseMatches = nameTeam.overall_l,
+                        teamPoints = nameTeam.points,
+                        formTeams = nameTeam.recent_form
+                    };
+                }*/
+
+
+
+
+                //MessageBox.Show(table.team_name, "zxc");
+            }
+
+        }
     }
 
 }

@@ -47,6 +47,7 @@
                 <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="105" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Margin="0,45,0,0" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="20" Width="86" Click="Button_Click"/>
 
 
     </Grid>
