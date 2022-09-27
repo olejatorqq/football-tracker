@@ -24,9 +24,9 @@ namespace WpfApp1
     
     public partial class MainWindow : Window
     {
-        internal class connectionToken
+        public static class connectionToken
         {
-            public string token = "Paste your token here";
+            public static string token = "Paste your token here";
         }
         internal class TeamList
         {
@@ -61,19 +61,22 @@ namespace WpfApp1
             /// Логика работы таблицы Апл
             /// </summary>
 
-            /*connectionToken auth_token = new connectionToken();
             var client = new HttpClient();
-            var requestStanding = new HttpRequestMessage
+            var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://api.football-data.org/v4/competitions/PL/standings"),
-                Headers =
-                {
-                    { "X-Auth-Token", auth_token.token },
-                },
+                RequestUri = new Uri($"https://data.football-api.com/v3/standings/1204?Authorization={connectionToken.token}"),
             };
 
-            TeamList[] teamList = new TeamList[20];*/
+            TeamList[] teamList = new TeamList[20];
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(body);
+            }
+
 
             /*using (var response = await client.SendAsync(requestStanding))
             {
@@ -96,7 +99,7 @@ namespace WpfApp1
             /// Логика работы таблицы с расписанием Апл
             /// </summary>
             /// 
-            
+
             //dgMain.ItemsSource = teamList;
 
 

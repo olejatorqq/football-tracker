@@ -6,75 +6,39 @@ using System.Threading.Tasks;
 
 namespace DeserializeTableClass
 {
-    public class Area
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string code { get; set; }
-        public string flag { get; set; }
-    }
-
-    public class Competition
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string code { get; set; }
-        public string type { get; set; }
-        public string emblem { get; set; }
-    }
-
-    public class Filters
-    {
-        public string season { get; set; }
-    }
-
     public class Root
     {
-        public Filters filters { get; set; }
-        public Area area { get; set; }
-        public Competition competition { get; set; }
-        public Season season { get; set; }
-        public List<Standing> standings { get; set; }
-    }
-
-    public class Season
-    {
-        public int id { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
-        public int currentMatchday { get; set; }
-        public object winner { get; set; }
-    }
-
-    public class Standing
-    {
-        public string stage { get; set; }
-        public string type { get; set; }
-        public object group { get; set; }
-        public List<Table> table { get; set; }
-    }
-
-    public class Table
-    {
-        public int position { get; set; }
-        public Team team { get; set; }
-        public int playedGames { get; set; }
-        public string form { get; set; }
-        public int won { get; set; }
-        public int draw { get; set; }
-        public int lost { get; set; }
-        public int points { get; set; }
-        public int goalsFor { get; set; }
-        public int goalsAgainst { get; set; }
-        public int goalDifference { get; set; }
-    }
-
-    public class Team
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string shortName { get; set; }
-        public string tla { get; set; }
-        public string crest { get; set; }
+        public string comp_id { get; set; }
+        public string season { get; set; }
+        public string round { get; set; }
+        public string stage_id { get; set; }
+        public object comp_group { get; set; }
+        public string country { get; set; }
+        public string team_id { get; set; }
+        public string team_name { get; set; }
+        public string status { get; set; }
+        public string recent_form { get; set; }
+        public string position { get; set; }
+        public string overall_gp { get; set; }
+        public string overall_w { get; set; }
+        public string overall_d { get; set; }
+        public string overall_l { get; set; }
+        public string overall_gs { get; set; }
+        public string overall_ga { get; set; }
+        public string home_gp { get; set; }
+        public string home_w { get; set; }
+        public string home_d { get; set; }
+        public string home_l { get; set; }
+        public string home_gs { get; set; }
+        public string home_ga { get; set; }
+        public string away_gp { get; set; }
+        public string away_w { get; set; }
+        public string away_d { get; set; }
+        public string away_l { get; set; }
+        public string away_gs { get; set; }
+        public string away_ga { get; set; }
+        public string gd { get; set; }
+        public string points { get; set; }
+        public string description { get; set; }
     }
 }
