@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,18 +27,18 @@ namespace WpfApp1
     {
         public static class connectionToken
         {
-            public static string token = "Paste your token here";
+            public static string token = "Paste your Api key here";
         }
         internal class TeamList
         {
-            public int teamPosition { get; set; }
+            public string teamPosition { get; set; }
             public string teamName { get; set; }
-            public int matchPlayed { get; set; }
-            public int winMatches { get; set; }
+            public string matchPlayed { get; set; }
+            public string winMatches { get; set; }
             
-            public int drawMatches { get; set; }
-            public int loseMatches { get; set; }
-            public int teamPoints { get; set; }
+            public string drawMatches { get; set; }
+            public string loseMatches { get; set; }
+            public string teamPoints { get; set; }
             public string formTeams { get; set; }
         }
         internal class SheduleList
@@ -72,11 +73,32 @@ namespace WpfApp1
 
             using (var response = await client.SendAsync(request))
             {
+                
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
+                List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
+                
+                foreach (var nameTeam in table)
+                {
+                    teamList[int.Parse(nameTeam.position) - 1] = new TeamList
+                    {
+                        teamPosition = nameTeam.position,
+                        teamName = nameTeam.team_name,
+                        matchPlayed = nameTeam.round,
+                        winMatches = nameTeam.overall_w,
+                        drawMatches = nameTeam.overall_d,
+                        loseMatches = nameTeam.overall_l,
+                        teamPoints = nameTeam.points,
+                        formTeams = nameTeam.recent_form
+                    };
+                }
+                
+                
+                //MessageBox.Show(table.team_name, "zxc");
+
                 Console.WriteLine(body);
             }
-
+            dgMain.ItemsSource = teamList;
 
             /*using (var response = await client.SendAsync(requestStanding))
             {
