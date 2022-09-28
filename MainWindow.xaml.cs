@@ -27,7 +27,7 @@ namespace WpfApp1
     {
         public static class connectionToken
         {
-            public static string token = "Paste your Api key here"
+            public static string token = "Paste your Api key here";
         }
         internal class TeamList
         {
@@ -48,15 +48,16 @@ namespace WpfApp1
             public string matchScore { get; set; }
             public string team2SheduleName { get; set;}
         }
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        
 
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
+            
 
             /// <summary>
             /// Логика работы таблицы Апл
@@ -93,34 +94,30 @@ namespace WpfApp1
                     };
                 }
 
-                 
-
-
-                //MessageBox.Show(table.team_name, "zxc");
+    
             }
 
             dgMain.ItemsSource = teamList;
 
 
 
+            /// <summary>
+            /// Логика работы расписания матчей
+            /// </summary>
 
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
             DateTime thisDay = DateTime.Today;
             DateTime endDate = DateTime.Today.AddDays(7);
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            var client1 = new HttpClient();
+            var request1 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id=1204&from_date={thisDay.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={connectionToken.token}"),
             };
-            
+
             SheduleList[] sheduleList = new SheduleList[10];
 
 
-            using (var response = await client.SendAsync(request))
+            using (var response = await client1.SendAsync(request1))
             {
 
                 response.EnsureSuccessStatusCode();
@@ -141,34 +138,19 @@ namespace WpfApp1
                     {
                         score = shedule.localteam_score + " " + shedule.visitorteam_score;
                     }
-                    sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score , team2SheduleName = shedule.visitorteam_name};
+                    sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score, team2SheduleName = shedule.visitorteam_name };
                     i++;
                 }
-
-                /*for (int i = 0; i < sheduleList.Length; i++)
-                {
-                    foreach (var team in tableShedule)
-                    {
-                        if (team.localteam_score == null && team.visitorteam_score == null)
-                        {
-                            score = "0:0";
-                        }
-                        else
-                        {
-                            score = team.localteam_score + " " + team.visitorteam_score;     
-                        }
-                        sheduleList[i] = new SheduleList { matchTime = team.time + " " + team.formatted_date, team1SheduleName = team.localteam_name, matchScore = score };
-                        break;
-                    }
-                }*/
 
 
                 dgMain_Shedule.ItemsSource = sheduleList;
 
-                //MessageBox.Show(table.team_name, "zxc");
+               
+
+                
+
             }
 
         }
     }
-
 }

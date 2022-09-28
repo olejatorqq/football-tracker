@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Name="MW" x:Class="WpfApp1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="EplTracker" Height="450" Width="800" Loaded="MainWindow_LoadedAsync">
+        <Window.Background>
+        <ImageBrush ImageSource="https://www.meme-arsenal.com/memes/ec0b227121bba9b12f16cbf9679a11b5.jpg" Stretch="Fill" />
+        </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -47,7 +50,7 @@
                 <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="97" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Margin="0,37,0,0" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="28" Width="86" Click="Button_Click"/>
+        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Margin="0,37,0,0" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="28" Width="86"/>
 
 
     </Grid>
