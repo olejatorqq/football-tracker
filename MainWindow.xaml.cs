@@ -117,7 +117,6 @@ namespace WpfApp1
 
             SheduleList[] sheduleList = new SheduleList[10];
 
-
             using (var response = await client1.SendAsync(request1))
             {
 
@@ -131,14 +130,12 @@ namespace WpfApp1
 
                 foreach (var shedule in tableShedule)
                 {
-                    if (shedule.localteam_score == "?" && shedule.visitorteam_score == "?")
-                    {
-                        score = null;
-                    }
-                    else
+
+                    if (shedule.localteam_score != "?" && shedule.visitorteam_score != "?")
                     {
                         score = shedule.localteam_score + " " + shedule.visitorteam_score;
                     }
+
                     sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score, team2SheduleName = shedule.visitorteam_name };
                     i++;
                 }
@@ -148,16 +145,19 @@ namespace WpfApp1
 
             }
         }
-        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
+        private void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-
 
             StandingsLeague(1204);
             MatchesFromDate(1204);
 
+        }
 
-
-
+        private void LaLigueButton_Click(object sender, RoutedEventArgs e)
+        {
+            StandingsLeague(1399);
+            MatchesFromDate(1399);
+            LeagueNameLabel.Content = "LaLiga";
         }
     }
 }

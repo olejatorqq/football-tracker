@@ -47,8 +47,8 @@
                 <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="97" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="28" Width="86"/>
         <Label x:Name="LeagueNameLabel" Content="English Premier League" HorizontalAlignment="Center" Margin="0,51,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="4" Height="44" Width="327" FontSize="24" FontWeight="Bold" FontStyle="Italic" FontFamily="Arial Black" IsEnabled="False" Grid.RowSpan="2"/>
+        <Button x:Name="LaLigueButton" Content="LaLiga" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" Height="30" Width="86" Click="LaLigueButton_Click" Grid.Column="4" Grid.RowSpan="2"/>
 
 
     </Grid>
