@@ -150,6 +150,7 @@ namespace WpfApp1
 
             StandingsLeague(1204);
             MatchesFromDate(1204);
+            LeagueNameLabel.Content = "English Premier League";
 
         }
 
@@ -158,6 +159,13 @@ namespace WpfApp1
             StandingsLeague(1399);
             MatchesFromDate(1399);
             LeagueNameLabel.Content = "LaLiga";
+        }
+
+        private void SerieAButton_Click(object sender, RoutedEventArgs e)
+        {
+            StandingsLeague(1269);
+            MatchesFromDate(1269);
+            LeagueNameLabel.Content = "Serie A";
         }
     }
 }
