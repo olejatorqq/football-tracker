@@ -55,30 +55,28 @@ namespace WpfApp1
         }
 
 
-        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Логика работы таблицы Апл
+        /// </summary>
+        private async void StandingsLeague(int id)
         {
-            
-
-            /// <summary>
-            /// Логика работы таблицы Апл
-            /// </summary>
 
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/standings/1204?Authorization={connectionToken.token}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/standings/{id}?Authorization={connectionToken.token}"),
             };
 
             TeamList[] teamList = new TeamList[20];
 
             using (var response = await client.SendAsync(request))
             {
-                
+
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
                 List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
-                
+
                 foreach (var nameTeam in table)
                 {
                     teamList[int.Parse(nameTeam.position) - 1] = new TeamList
@@ -94,12 +92,15 @@ namespace WpfApp1
                     };
                 }
 
-    
+
             }
 
             dgMain.ItemsSource = teamList;
+            
+        }
 
-
+        private async void MatchesFromDate(int id)
+        {
 
             /// <summary>
             /// Логика работы расписания матчей
@@ -111,7 +112,7 @@ namespace WpfApp1
             var request1 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id=1204&from_date={thisDay.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={connectionToken.token}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={thisDay.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={connectionToken.token}"),
             };
 
             SheduleList[] sheduleList = new SheduleList[10];
@@ -132,7 +133,7 @@ namespace WpfApp1
                 {
                     if (shedule.localteam_score == "?" && shedule.visitorteam_score == "?")
                     {
-                        score = "    0:0";
+                        score = null;
                     }
                     else
                     {
@@ -145,11 +146,17 @@ namespace WpfApp1
 
                 dgMain_Shedule.ItemsSource = sheduleList;
 
-               
-
-                
-
             }
+        }
+        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
+        {
+
+
+            StandingsLeague(1204);
+            MatchesFromDate(1204);
+
+
+
 
         }
     }

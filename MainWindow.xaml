@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="EplTracker" Height="450" Width="800" Loaded="MainWindow_LoadedAsync">
-        <Window.Background>
-        <ImageBrush ImageSource="https://www.meme-arsenal.com/memes/ec0b227121bba9b12f16cbf9679a11b5.jpg" Stretch="Fill" />
-        </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -50,7 +47,8 @@
                 <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="97" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Margin="0,37,0,0" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="28" Width="86"/>
+        <Button Grid.Column="4" Content="Update" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.383,0.293" Height="28" Width="86"/>
+        <Label x:Name="LeagueNameLabel" Content="English Premier League" HorizontalAlignment="Center" Margin="0,51,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="4" Height="44" Width="327" FontSize="24" FontWeight="Bold" FontStyle="Italic" FontFamily="Arial Black" IsEnabled="False" Grid.RowSpan="2"/>
 
 
     </Grid>
