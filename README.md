@@ -1,2 +1,2 @@
 # EPL stats checker
-App closed due to poor work API and bad results of my favorite team :|
+In the future, I will be adding odds and top scores.
