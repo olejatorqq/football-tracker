@@ -151,22 +151,21 @@ namespace WpfApp1
 
             StandingsLeague(1204);
             MatchesFromDate(1204);
-            //LeagueNameLabel.Content = "English Premier League";
-
+            LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/premier-league-logo.png", UriKind.Relative));
         }
 
         private void LaLigueButton_Click(object sender, RoutedEventArgs e)
         {
             StandingsLeague(1399);
             MatchesFromDate(1399);
-            //LeagueNameLabel.Content = "LaLiga";
+            LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/la-liga-logo.png", UriKind.Relative));
         }
 
         private void SerieAButton_Click(object sender, RoutedEventArgs e)
         {
             StandingsLeague(1269);
             MatchesFromDate(1269);
-            //LeagueNameLabel.Content = "Serie A";
+            LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/serie-a-logo.png", UriKind.Relative));
         }
 
     }

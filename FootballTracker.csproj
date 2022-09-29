@@ -101,9 +101,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\la-liga-logo.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\premier-league-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\serie-a-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
