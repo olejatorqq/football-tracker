@@ -60,6 +60,7 @@ namespace WpfApp1
         /// </summary>
         private async void StandingsLeague(int id)
         {
+
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
@@ -69,15 +70,13 @@ namespace WpfApp1
             
             TeamList[] teamList = new TeamList[20];
 
-            var count = 0;
             using (var response = await client.SendAsync(request))
             {
 
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
                 List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
-
-
+ 
                 foreach (var nameTeam in table)
                 {
 
@@ -149,12 +148,10 @@ namespace WpfApp1
         }
         private void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            //StandingsLeague(1457);
-            //MatchesFromDate(1457);
-            //LeagueNameLabel.Content = "Bundesliga";
+
             StandingsLeague(1204);
             MatchesFromDate(1204);
-            LeagueNameLabel.Content = "English Premier League";
+            //LeagueNameLabel.Content = "English Premier League";
 
         }
 
@@ -162,14 +159,14 @@ namespace WpfApp1
         {
             StandingsLeague(1399);
             MatchesFromDate(1399);
-            LeagueNameLabel.Content = "LaLiga";
+            //LeagueNameLabel.Content = "LaLiga";
         }
 
         private void SerieAButton_Click(object sender, RoutedEventArgs e)
         {
             StandingsLeague(1269);
             MatchesFromDate(1269);
-            LeagueNameLabel.Content = "Serie A";
+            //LeagueNameLabel.Content = "Serie A";
         }
 
     }
