@@ -25,9 +25,12 @@ namespace WpfApp1
     
     public partial class MainWindow : Window
     {
-        public static class connectionToken
+        public static class Tokens
         {
-            public static string token = "Paste your Api key here";
+            public static string tokenAPI = "Paste your Api key here";
+            public static int tokenEPL = 1204;
+            public static int tokenLaLiga = 1399;
+            public static int tokenSerieA = 1269;
         }
         internal class TeamList
         {
@@ -65,7 +68,7 @@ namespace WpfApp1
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/standings/{id}?Authorization={connectionToken.token}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/standings/{id}?Authorization={Tokens.tokenAPI}"),
             };
             
             TeamList[] teamList = new TeamList[20];
@@ -107,13 +110,13 @@ namespace WpfApp1
             /// Логика работы расписания матчей
             /// </summary>
 
-            DateTime thisDay = DateTime.Today;
+            DateTime yesterday = DateTime.Today.AddDays(-1);
             DateTime endDate = DateTime.Today.AddDays(7);
             var client1 = new HttpClient();
             var request1 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={thisDay.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={connectionToken.token}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={yesterday.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={Tokens.tokenAPI}"),
             };
 
             SheduleList[] sheduleList = new SheduleList[10];
@@ -141,7 +144,6 @@ namespace WpfApp1
                     i++;
                 }
 
-
                 dgMain_Shedule.ItemsSource = sheduleList;
 
             }
@@ -149,22 +151,22 @@ namespace WpfApp1
         private void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
 
-            StandingsLeague(1204);
-            MatchesFromDate(1204);
+            StandingsLeague(Tokens.tokenEPL);
+            MatchesFromDate(Tokens.tokenEPL);
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/premier-league-logo.png", UriKind.Relative));
         }
 
         private void LaLigueButton_Click(object sender, RoutedEventArgs e)
         {
-            StandingsLeague(1399);
-            MatchesFromDate(1399);
+            StandingsLeague(Tokens.tokenLaLiga);
+            MatchesFromDate(Tokens.tokenLaLiga);
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/la-liga-logo.png", UriKind.Relative));
         }
 
         private void SerieAButton_Click(object sender, RoutedEventArgs e)
         {
-            StandingsLeague(1269);
-            MatchesFromDate(1269);
+            StandingsLeague(Tokens.tokenSerieA);
+            MatchesFromDate(Tokens.tokenSerieA);
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/serie-a-logo.png", UriKind.Relative));
         }
 
