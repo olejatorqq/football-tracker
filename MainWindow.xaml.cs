@@ -60,16 +60,16 @@ namespace WpfApp1
         /// </summary>
         private async void StandingsLeague(int id)
         {
-
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"https://data.football-api.com/v3/standings/{id}?Authorization={connectionToken.token}"),
             };
-
+            
             TeamList[] teamList = new TeamList[20];
 
+            var count = 0;
             using (var response = await client.SendAsync(request))
             {
 
@@ -77,8 +77,10 @@ namespace WpfApp1
                 var body = await response.Content.ReadAsStringAsync();
                 List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
 
+
                 foreach (var nameTeam in table)
                 {
+
                     teamList[int.Parse(nameTeam.position) - 1] = new TeamList
                     {
                         teamPosition = nameTeam.position,
@@ -90,11 +92,11 @@ namespace WpfApp1
                         teamPoints = nameTeam.points,
                         formTeams = nameTeam.recent_form
                     };
+                    
                 }
 
-
+                
             }
-
             dgMain.ItemsSource = teamList;
             
         }
@@ -147,7 +149,9 @@ namespace WpfApp1
         }
         private void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-
+            //StandingsLeague(1457);
+            //MatchesFromDate(1457);
+            //LeagueNameLabel.Content = "Bundesliga";
             StandingsLeague(1204);
             MatchesFromDate(1204);
             LeagueNameLabel.Content = "English Premier League";
@@ -167,5 +171,6 @@ namespace WpfApp1
             MatchesFromDate(1269);
             LeagueNameLabel.Content = "Serie A";
         }
+
     }
 }
