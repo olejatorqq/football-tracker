@@ -95,8 +95,6 @@ namespace WpfApp1
                     };
                     
                 }
-                MessageBox.Show(teamList.Length.ToString());
-
 
             }
             
@@ -132,7 +130,7 @@ namespace WpfApp1
             /// Логика работы расписания матчей
             /// </summary>
 
-            DateTime yesterday = DateTime.Today.AddDays(-1);
+            DateTime yesterday = DateTime.Today.AddDays(-7);
             DateTime endDate = DateTime.Today.AddDays(7);
             var client1 = new HttpClient();
             var request1 = new HttpRequestMessage
@@ -155,10 +153,7 @@ namespace WpfApp1
 
                 foreach (var item in tableShedule)
                 {
-                    foreach (var item1 in item.localteam_name)
-                    {
-                        count++;
-                    }
+                    count++;   
                 }
 
                 SheduleList[] sheduleList = new SheduleList[count];
@@ -176,9 +171,6 @@ namespace WpfApp1
                 }
                 //Need to fix bug with error in shedule
                 dgMain_Shedule.ItemsSource = sheduleList;
-
-
-
             }
         }
 
