@@ -70,15 +70,25 @@ namespace WpfApp1
                 RequestUri = new Uri($"https://data.football-api.com/v3/standings/{id}?Authorization={Tokens.tokenAPI}"),
             };
             
-            TeamList[] teamList = new TeamList[20];
+            
+
+            int count = 0;
 
             using (var response = await client.SendAsync(request))
             {
 
+                
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
                 List<DeserializeTableClass.Root> table = JsonConvert.DeserializeObject<List<DeserializeTableClass.Root>>(body);
- 
+
+                foreach (var item in table)
+                {
+                    count++;
+                }
+
+                TeamList[] teamList = new TeamList[count];
+
                 foreach (var nameTeam in table)
                 {
 
@@ -96,12 +106,11 @@ namespace WpfApp1
                     
                 }
 
+                dgMain.ItemsSource = teamList;
+
             }
             
-            dgMain.ItemsSource = teamList;
-
-
-           
+        
 
             /*foreach (TeamList team in dgMain.ItemsSource)
             {
@@ -130,7 +139,7 @@ namespace WpfApp1
             /// Логика работы расписания матчей
             /// </summary>
 
-            DateTime yesterday = DateTime.Today.AddDays(-7);
+            DateTime yesterday = DateTime.Today.AddDays(-1);
             DateTime endDate = DateTime.Today.AddDays(7);
             var client1 = new HttpClient();
             var request1 = new HttpRequestMessage
@@ -160,10 +169,14 @@ namespace WpfApp1
 
                 foreach (var shedule in tableShedule)
                 {
-
-                    if (shedule.localteam_score != "?" && shedule.visitorteam_score != "?")
+                  
+                    if(shedule.ft_score == "[-]")
                     {
-                        score = shedule.localteam_score + " " + shedule.visitorteam_score;
+                        score = "-";
+                    }
+                    else
+                    {
+                        score = shedule.ft_score.Replace("[","").Replace("]","");
                     }
 
                     sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score, team2SheduleName = shedule.visitorteam_name };
@@ -197,5 +210,12 @@ namespace WpfApp1
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/serie-a-logo.png", UriKind.Relative));
         }
 
+        private void BundesligaButton_Click(object sender, RoutedEventArgs e)
+        {
+            StandingsLeague(1229);
+            MatchesFromDate(1229);
+
+            LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/bundesliga-logo.png", UriKind.Relative));
+        }
     }
 }
