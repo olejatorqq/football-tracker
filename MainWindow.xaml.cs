@@ -63,7 +63,6 @@ namespace WpfApp1
         /// </summary>
         private async void StandingsLeague(int id)
         {
-
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
@@ -96,12 +95,35 @@ namespace WpfApp1
                     };
                     
                 }
+                MessageBox.Show(teamList.Length.ToString());
 
-                
+
             }
-            dgMain.ItemsSource = teamList;
             
+            dgMain.ItemsSource = teamList;
+
+
+           
+
+            /*foreach (TeamList team in dgMain.ItemsSource)
+            {
+                var row = dgMain.ItemContainerGenerator.ContainerFromItem(team) as DataGridRow;
+                if (team.teamPosition == "1")
+                {
+                    MessageBox.Show(row.ToString());
+                    row.Background = Brushes.Green;
+                }
+            }*/
+
+
+
         }
+
+
+
+
+
+
 
         private async void MatchesFromDate(int id)
         {
@@ -118,8 +140,8 @@ namespace WpfApp1
                 Method = HttpMethod.Get,
                 RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={yesterday.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={Tokens.tokenAPI}"),
             };
-
-            SheduleList[] sheduleList = new SheduleList[10];
+            int count = 0;
+            
 
             using (var response = await client1.SendAsync(request1))
             {
@@ -131,6 +153,15 @@ namespace WpfApp1
                 string score = null;
                 int i = 0;
 
+                foreach (var item in tableShedule)
+                {
+                    foreach (var item1 in item.localteam_name)
+                    {
+                        count++;
+                    }
+                }
+
+                SheduleList[] sheduleList = new SheduleList[count];
 
                 foreach (var shedule in tableShedule)
                 {
@@ -143,11 +174,14 @@ namespace WpfApp1
                     sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score, team2SheduleName = shedule.visitorteam_name };
                     i++;
                 }
-
+                //Need to fix bug with error in shedule
                 dgMain_Shedule.ItemsSource = sheduleList;
+
+
 
             }
         }
+
         private void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
 
@@ -167,6 +201,7 @@ namespace WpfApp1
         {
             StandingsLeague(Tokens.tokenSerieA);
             MatchesFromDate(Tokens.tokenSerieA);
+            
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/serie-a-logo.png", UriKind.Relative));
         }
 
