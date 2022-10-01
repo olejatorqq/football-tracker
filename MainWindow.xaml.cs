@@ -31,6 +31,8 @@ namespace WpfApp1
             public static int tokenEPL = 1204;
             public static int tokenLaLiga = 1399;
             public static int tokenSerieA = 1269;
+            public static int tokenBundesliga = 1229;
+            public static int tokenRPL = 1457;
         }
         internal class TeamList
         {
@@ -212,10 +214,18 @@ namespace WpfApp1
 
         private void BundesligaButton_Click(object sender, RoutedEventArgs e)
         {
-            StandingsLeague(1229);
-            MatchesFromDate(1229);
+            StandingsLeague(Tokens.tokenBundesliga);
+            MatchesFromDate(Tokens.tokenBundesliga);
 
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/bundesliga-logo.png", UriKind.Relative));
+        }
+
+        private void RPLButton_Click(object sender, RoutedEventArgs e)
+        {
+            StandingsLeague(Tokens.tokenRPL);
+            MatchesFromDate(Tokens.tokenRPL);
+
+            LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/rpl-logo.png", UriKind.Relative));
         }
     }
 }
