@@ -60,14 +60,16 @@
         <DataGrid x:Name="dgMain_Shedule" AutoGenerateColumns="False"  Grid.ColumnSpan="4" Grid.RowSpan="3" Margin="10,0,0,10" IsReadOnly="True" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Grid.Row="1" IsSynchronizedWithCurrentItem="False" FontWeight="Bold" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding matchTime}" Width="72" Header="Time" />
-                <DataGridTextColumn Binding="{Binding team1SheduleName}" Width="99" Header="Club" />
-                <DataGridTextColumn Binding="{Binding matchScore}" Width="42" Header="Score" />
-                <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="99" Header="Club" />
+                <DataGridTextColumn Binding="{Binding team1SheduleName}" Width="110" Header="Club" />
+
+                <DataGridTextColumn Binding="{Binding versus}" Width="20"/>
+
+                <DataGridTextColumn Binding="{Binding team2SheduleName}" Width="110" Header="Club" />
             </DataGrid.Columns>
         </DataGrid>
 
         <Button x:Name="LaLigueButton" Content="LaLiga" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="86" Click="LaLigueButton_Click" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" FontWeight="Bold"/>
-        <Button x:Name="EPLButton" Content="EPL" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="86" Click="MainWindow_LoadedAsync" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,0,0,0" FontWeight="Bold" Background="#FFDDDDDD"/>
+        <Button x:Name="EPLButton" Content="EPL" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="86" Click="MainWindow_LoadedAsync" Grid.Column="5" Grid.ColumnSpan="2" Margin="0,28,0,0" FontWeight="Bold" Background="#FFDDDDDD" Grid.RowSpan="2"/>
         <Button x:Name="SerieAButton" Content="Serie A" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="86" Click="SerieAButton_Click" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" FontWeight="Bold"/>
         <Button x:Name="BundesligaButton" Content="Bundesliga" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="86"  Grid.Column="5" Grid.Row="3" Margin="0,74,0,0" Grid.ColumnSpan="2" FontWeight="Bold" Click="BundesligaButton_Click" Grid.RowSpan="2"/>
         <Button x:Name="RPLButton" Content="RPL" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="86"  Grid.Column="5" Grid.Row="4" Margin="0,75,0,0" Grid.ColumnSpan="2" FontWeight="Bold" Click="RPLButton_Click" Grid.RowSpan="2" />

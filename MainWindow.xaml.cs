@@ -50,7 +50,7 @@ namespace WpfApp1
         {
             public string matchTime { get; set; }
             public string team1SheduleName { get; set; }
-            public string matchScore { get; set; }
+            public string versus { get; set; }
             public string team2SheduleName { get; set;}
         }
 
@@ -112,27 +112,14 @@ namespace WpfApp1
 
             }
             
-        
-
-            /*foreach (TeamList team in dgMain.ItemsSource)
-            {
-                var row = dgMain.ItemContainerGenerator.ContainerFromItem(team) as DataGridRow;
-                if (team.teamPosition == "1")
-                {
-                    MessageBox.Show(row.ToString());
-                    row.Background = Brushes.Green;
-                }
-            }*/
-
-
-
+       
         }
 
 
 
 
 
-
+        
 
         private async void MatchesFromDate(int id)
         {
@@ -141,13 +128,13 @@ namespace WpfApp1
             /// Логика работы расписания матчей
             /// </summary>
 
-            DateTime yesterday = DateTime.Today.AddDays(-1);
+            DateTime today = DateTime.Today;
             DateTime endDate = DateTime.Today.AddDays(7);
             var client1 = new HttpClient();
             var request1 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={yesterday.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={Tokens.tokenAPI}"),
+                RequestUri = new Uri($"https://data.football-api.com/v3/matches?comp_id={id}&from_date={today.ToString("d")}&to_date={endDate.ToString("d")}&Authorization={Tokens.tokenAPI}"),
             };
             int count = 0;
             
@@ -159,7 +146,7 @@ namespace WpfApp1
                 var body = await response.Content.ReadAsStringAsync();
                 List<DeserializeSheduleClass.Root> tableShedule = JsonConvert.DeserializeObject<List<DeserializeSheduleClass.Root>>(body);
 
-                string score = null;
+                //string score = null;
                 int i = 0;
 
                 foreach (var item in tableShedule)
@@ -171,17 +158,8 @@ namespace WpfApp1
 
                 foreach (var shedule in tableShedule)
                 {
-                  
-                    if(shedule.ft_score == "[-]")
-                    {
-                        score = "-";
-                    }
-                    else
-                    {
-                        score = shedule.ft_score.Replace("[","").Replace("]","");
-                    }
-
-                    sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, matchScore = score, team2SheduleName = shedule.visitorteam_name };
+                 
+                    sheduleList[i] = new SheduleList { matchTime = shedule.time + " " + shedule.formatted_date, team1SheduleName = shedule.localteam_name, versus = "vs", team2SheduleName = shedule.visitorteam_name };
                     i++;
                 }
                 //Need to fix bug with error in shedule
@@ -194,6 +172,7 @@ namespace WpfApp1
 
             StandingsLeague(Tokens.tokenEPL);
             MatchesFromDate(Tokens.tokenEPL);
+
             LeagueLogo.Source = new BitmapImage(new Uri(@"/Resources/premier-league-logo.png", UriKind.Relative));
         }
 
