@@ -1,6 +1,6 @@
-# Foootball Tracker (App for football fans)
+# Foootball Tracker
 ____
-## hello
+## App for football fans (5 Leagues) 
 # • English Premier League
 ![image](https://github.com/olejatorqq/football-tracker/blob/master/Screenshots/EplScreen.png)
 # • LaLiga
