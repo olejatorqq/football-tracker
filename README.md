@@ -1,6 +1,7 @@
 # Foootball Tracker
 ____
-## App for football fans (5 Leagues). LiveTable and Shedule (in the future -> {odds, Champion League})
+## App for football fans (5 Leagues). LiveTable and Shedule
+**(In the future -> {odds, Champion League})**
 # • English Premier League
 ![image](https://github.com/olejatorqq/football-tracker/blob/master/Screenshots/EplScreen.png)
 # • LaLiga
